@@ -1,0 +1,27 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: springboot-dubbo-provider
+dubbo:
+  scan:
+    # 包名根据自己的实际情况写
+    base-packages: com.cwx.provider
+  protocol:
+    port: -1
+    name: dubbo
+  registry:
+    address: 127.0.0.1:2181
+    # 注册到 zookeeper ，上面地址是 zookeeper 的默认地址
+    protocol: zookeeper
+  provider:
+    version: 1.0.0
+    timeout: 10000
+    retries: 3
+  consumer:
+    check: false
+    timeout: 10000
+    retries: 3
+  # 假如使用新的 dubbo-admin 的话记得添加元数据配置，这样可以在 dubbo-admin 用来调试 provider 的服务
+  metadata-report:
+    address: zookeeper://127.0.0.1:2181
